@@ -3,7 +3,7 @@ import { faSunPlantWilt } from '@fortawesome/free-solid-svg-icons'; // You can c
 import '../Welcome/style.css'
 import React, { useEffect } from 'react'
 import { Button } from 'react-bootstrap';
-import vidioBG from '../assets/videoB2.mp4'
+import vidioBG from '../assets/video/videoB2.mp4'
 import { Link } from 'react-router-dom';
 
 

@@ -1,0 +1,27 @@
+@import '../assets/scss/variable.scss';
+.container{
+display: flex;
+text-align: center;
+background-color: rgba(255, 255, 255 ,0.3 );
+margin-top: 1rem;
+color: wheat;
+
+}
+.text{
+ display: flex;
+ align-items: center;
+ flex-direction: column;
+ justify-content: space-evenly;   
+}
+.tempirater{
+    display: flex;
+    font-size: 3rem;
+}
+.time{
+    display: flex;
+    gap: $weather-info-gap ;
+    justify-content: center;
+    font-size: 1rem;
+    align-items: center;
+    opacity: 0.6;
+}

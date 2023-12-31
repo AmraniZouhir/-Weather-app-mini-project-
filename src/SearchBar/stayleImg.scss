@@ -1,5 +1,12 @@
-.img-bg{
+.img {
+    &-backgrond{
+        z-index: -1;
+        background-color: black;
+    }
+
     background-size: cover;
-    width: 50vw;
+    width: 100%;
     margin: 0 auto;
+    opacity: 0.6;
+    filter: blur(2px);
 }
