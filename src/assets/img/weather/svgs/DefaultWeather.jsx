@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function DefaultWeather({width='250px' , height='250px'}) {
+export default function DefaultWeather({width , height}) {
    
   
     return (
