@@ -1,10 +1,10 @@
 import React from 'react';
 
 
-export default function PositionSvg({width = '25px', height= '25px'}) {
+export default function PositionSvg({width = '25px', height= '25px',  color= '#fff' }) {
     return (
         <>
-            <svg fill='#2C73D2' version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+            <svg fill={color} version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
                  width={width} height={height} viewBox="0 0 395.71 395.71"
             >
                 <g>

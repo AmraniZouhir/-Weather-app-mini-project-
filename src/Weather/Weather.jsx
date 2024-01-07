@@ -15,7 +15,7 @@ export default function Weather() {
                     <Card.Title>
                         Ouarzazate , MA <PositionSvg />
                         <div className={style.time}>
-                            <div> 15H 22MIN</div>
+                        <div>Saturday , 15:00 AM</div>
                             <div><Time /></div>
                         </div>
                     </Card.Title>
@@ -27,13 +27,13 @@ export default function Weather() {
                             <div><Thermometer /></div>
                         </div>
                         <div>
-                            Good Morning Ouarzazate
+                            Good Morning Ouarzazateee
                             <div className={style.separator}></div>
 
                         </div>
                         <div className={style.infos}>
                             <div className={style.border_right}>
-                                <div><DefaultWeather/></div>
+                            <div><DefaultWeather color={'#fff'}/></div>
                                 <div>Sunrise</div>
                                 <div>08:00</div>
                             </div>
