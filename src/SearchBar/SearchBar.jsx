@@ -5,11 +5,10 @@ import { Autocomplete, TextField } from '@mui/material'
 
 export default function SearchBar() {
     const GEOAPIKEY = process.env.REACT_APP_GEO_API_KEY
-    const [cites ,setCites] = useState([]) 
+    const WEWTHAPIKEY = process.env.REACT_APP_WEATH_API_KEY
+    const [cites, setCites] = useState([])
     const handeleInputeChange = (e) => {
         const { value } = e.currentTarget;
-        console.log(GEOAPIKEY);
-    
         fetch(`https://api.geoapify.com/v1/geocode/autocomplete?text=${value}&type=city&format=json&apiKey=${GEOAPIKEY}`)
             .then(response => response.json())
             .then(json => {
@@ -27,9 +26,20 @@ export default function SearchBar() {
                 // Handle fetch errors
                 console.error('Error fetching data:', error);
             });
-    
-        console.log(value);
+
     }
+    const handelChangeSelect = (value) => {
+        console.log(WEWTHAPIKEY);
+        console.log('Received value:', value);
+    
+        const { lon, lat } = value;
+        fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${WEWTHAPIKEY}`)
+            .then(response => response.json())
+            .then(json => console.log(json))
+            .catch(error => console.error('Error:', error));
+    };
+    
+
     
     return (
         <>
@@ -37,11 +47,12 @@ export default function SearchBar() {
             <Form>
                 <Form.Group className={Style.serchContent}>
                     <Autocomplete className={Style.serchinput}
+                        onChange={handelChangeSelect}
                         clearOnBlur={false}
-                        getOptionLabel={(Option)=>Option.formatted}
+                        getOptionLabel={(Option) => Option.formatted}
                         renderInput={(prams) =>
                             <TextField onChange={handeleInputeChange}
-                            {...prams} label={'Enter your city...'} />}
+                                {...prams} label={'Enter your city...'} />}
                         options={cites}>
 
                     </Autocomplete>
