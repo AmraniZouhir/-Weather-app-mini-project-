@@ -13,14 +13,14 @@ export default function Weather() {
             <Card className={style.container}>
                 <Card.Body>
                     <Card.Title>
-                        Ouarzazate , MA <PositionSvg />
+                        Ouarzazate , MA <PositionSvg/>
                         <div className={style.time}>
-                        <div>Saturday , 15:00 AM</div>
-                            <div><Time /></div>
+                            <div>Saturday , 15:00 AM</div>
+                            <div><Time/></div>
                         </div>
                     </Card.Title>
                     <Card.Text as={'div'} className={style.text}>
-                        <div><DefaultWeather width={'250px'} height={'250px'}/></div>
+                        <div><DefaultWeather width={'250px'} height={'250px'} /></div>
                         <div className={style.tempirater}>
 
                             <div>  35° C</div>
@@ -33,17 +33,17 @@ export default function Weather() {
                         </div>
                         <div className={style.infos}>
                             <div className={style.border_right}>
-                            <div><DefaultWeather color={'#fff'}/></div>
+                                <div><DefaultWeather color={'#fff'} /></div>
                                 <div>Sunrise</div>
                                 <div>08:00</div>
                             </div>
                             <div className={style.border_right}>
-                                <div><Wind/></div>
+                                <div><Wind /></div>
                                 <div>Wind</div>
                                 <div>08m/s</div>
                             </div>
                             <div>
-                                <div><Thermometer color={'#fff'} width={'40px'} height={'40px'}/></div>
+                                <div><Thermometer color={'#fff'} width={'40px'} height={'40px'} /></div>
                                 <div>Temp</div>
                                 <div>35° C</div>
                             </div>

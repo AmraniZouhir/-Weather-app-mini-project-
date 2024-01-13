@@ -9,6 +9,10 @@ export default function SearchBar() {
     const [cites, setCites] = useState([])
     const handeleInputeChange = (e) => {
         const { value } = e.currentTarget;
+        if (value.trim() === "") {
+            // Handle the case where the input is empty
+            return;
+        }
         fetch(`https://api.geoapify.com/v1/geocode/autocomplete?text=${value}&type=city&format=json&apiKey=${GEOAPIKEY}`)
             .then(response => response.json())
             .then(json => {
@@ -19,31 +23,46 @@ export default function SearchBar() {
                     }));
                 } else {
                     // Handle the case where json.results is undefined or not an array
-                    console.error('Invalid data received from the API:', json);
+                    console.error('API 1', json);
                 }
             })
             .catch(error => {
                 // Handle fetch errors
                 console.error('Error fetching data:', error);
             });
-
     }
-    const handelChangeSelect = (value) => {
+    // const handelChangeSelect = (value) => {
+    //     console.log(WEWTHAPIKEY);
+    //     console.log('Received value:', value);
+
+    //     const { lon, lat } = value;
+    //     fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${WEWTHAPIKEY}`)
+    //         .then(response => response.json())
+    //         .then(json => console.log(json))
+    //         .catch(error => console.error('Error:', error));
+    // };
+    const handelChangeSelect = (event, value) => {
         console.log(WEWTHAPIKEY);
         console.log('Received value:', value);
     
-        const { lon, lat } = value;
-        fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${WEWTHAPIKEY}`)
-            .then(response => response.json())
-            .then(json => console.log(json))
-            .catch(error => console.error('Error:', error));
+        if (value && value.lat && value.lon) {
+            const { lon, lat } = value;
+            const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${WEWTHAPIKEY}`;
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(json => console.log(json))
+                .catch(error => console.error('Error:', error));
+        } else if (value === null) {
+            console.warn('Received null value.');
+            // Handle the case when value is null, if needed.
+        } else {
+            console.error('Invalid value object:', value);
+        }
     };
     
 
-    
     return (
         <>
-
             <Form>
                 <Form.Group className={Style.serchContent}>
                     <Autocomplete className={Style.serchinput}
@@ -60,7 +79,6 @@ export default function SearchBar() {
                 </Form.Group>
             </Form>
         </>
-
     )
 }
 
