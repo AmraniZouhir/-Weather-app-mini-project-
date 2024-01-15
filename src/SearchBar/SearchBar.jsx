@@ -2,11 +2,16 @@ import React, { useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
 import Style from '../SearchBar/styleSearchBar.module.scss'
 import { Autocomplete, TextField } from '@mui/material'
+import { useDispatch } from 'react-redux'
+import { setData } from '../features/Weather/Weather'
 
 export default function SearchBar() {
     const GEOAPIKEY = process.env.REACT_APP_GEO_API_KEY
     const WEWTHAPIKEY = process.env.REACT_APP_WEATH_API_KEY
+
     const [cites, setCites] = useState([])
+    const dispatche = useDispatch()
+
     const handeleInputeChange = (e) => {
         const { value } = e.currentTarget;
         if (value.trim() === "") {
@@ -31,16 +36,8 @@ export default function SearchBar() {
                 console.error('Error fetching data:', error);
             });
     }
-    // const handelChangeSelect = (value) => {
-    //     console.log(WEWTHAPIKEY);
-    //     console.log('Received value:', value);
 
-    //     const { lon, lat } = value;
-    //     fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${WEWTHAPIKEY}`)
-    //         .then(response => response.json())
-    //         .then(json => console.log(json))
-    //         .catch(error => console.error('Error:', error));
-    // };
+
     const handelChangeSelect = (event, value) => {
         console.log(WEWTHAPIKEY);
         console.log('Received value:', value);
@@ -50,7 +47,12 @@ export default function SearchBar() {
             const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${WEWTHAPIKEY}`;
             fetch(apiUrl)
                 .then(response => response.json())
-                .then(json => console.log(json))
+                .then(json => {
+                    const {clouds ,main, name,sys,weather,wind} =json
+                    dispatche(setData({clouds ,main, name,sys,weather,wind}))
+                })
+
+
                 .catch(error => console.error('Error:', error));
         } else if (value === null) {
             console.warn('Received null value.');

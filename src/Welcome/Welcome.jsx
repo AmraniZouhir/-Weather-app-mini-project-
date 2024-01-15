@@ -2,7 +2,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSunPlantWilt } from '@fortawesome/free-solid-svg-icons'; // You can choose any icon you want
 import '../Welcome/style.css'
 import React, { useEffect } from 'react'
-import { Button } from 'react-bootstrap';
 import vidioBG from '../assets/video/videoB2.mp4'
 import { Link } from 'react-router-dom';
 

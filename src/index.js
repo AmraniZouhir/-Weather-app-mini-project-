@@ -4,7 +4,7 @@ import reportWebVitals from './reportWebVitals';
 import './styale.scss'
 import AppRouter from './AppRouter/AppRouter';
 import { Provider } from 'react-redux';
-import { store } from './app/store';
+import { store } from './app/store/indexStore';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
