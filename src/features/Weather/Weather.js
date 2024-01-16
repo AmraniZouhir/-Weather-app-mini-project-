@@ -2,11 +2,19 @@ import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
     clouds: undefined,
-    main: undefined,
+    main: {
+        feels_like:undefined,
+        temp_max:undefined,
+    },
     name: undefined,
-    sys: undefined,
+    sys: {
+        country:undefined,
+        sunrise:undefined
+    },
     weather: undefined,
-    wind: undefined
+    wind: {
+        speed:undefined
+    }
 }
 
 export const WeatherSlise = createSlice(
@@ -15,7 +23,14 @@ export const WeatherSlise = createSlice(
         initialState,
         reducers: {
             setData: (state, action) => {
-                console.log(action.payload)
+                // state = action.payload // hana tl3 lina ga3 les doner lijayin mn payload
+
+                state.clouds = action.payload.clouds;
+                state.main = action.payload.main;
+                state.name = action.payload.name;
+                state.sys = action.payload.sys;
+                state.weather = action.payload.weather;
+                state.wind = action.payload.wind;
             }
         }
     }

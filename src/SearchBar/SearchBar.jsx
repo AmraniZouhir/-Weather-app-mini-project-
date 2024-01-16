@@ -10,6 +10,7 @@ export default function SearchBar() {
     const WEWTHAPIKEY = process.env.REACT_APP_WEATH_API_KEY
 
     const [cites, setCites] = useState([])
+    const [unity, setUnity] = useState('metric')
     const dispatche = useDispatch()
 
     const handeleInputeChange = (e) => {
@@ -44,7 +45,7 @@ export default function SearchBar() {
     
         if (value && value.lat && value.lon) {
             const { lon, lat } = value;
-            const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${WEWTHAPIKEY}`;
+            const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&units=${unity}&lon=${lon}&appid=${WEWTHAPIKEY}`;
             fetch(apiUrl)
                 .then(response => response.json())
                 .then(json => {
