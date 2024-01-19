@@ -62,6 +62,14 @@ export default function SearchBar() {
     };
 
 
+    const getGeipoLocation =()=>{
+
+    }
+    const hasGeipoLocation =()=>{
+        return navigator.geolocation
+    }
+
+
     return (
         <>
             <Form>
