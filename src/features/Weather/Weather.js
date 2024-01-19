@@ -3,18 +3,19 @@ import { createSlice } from "@reduxjs/toolkit"
 const initialState = {
     clouds: undefined,
     main: {
-        feels_like:undefined,
-        temp_max:undefined,
+        feels_like: undefined,
+        temp_max: undefined,
     },
     name: undefined,
     sys: {
-        country:undefined,
-        sunrise:undefined
+        country: undefined,
+        sunrise: undefined
     },
     weather: undefined,
     wind: {
-        speed:undefined
-    }
+        speed: undefined
+    },
+    isLoaded: false,
 }
 
 export const WeatherSlise = createSlice(
@@ -31,9 +32,14 @@ export const WeatherSlise = createSlice(
                 state.sys = action.payload.sys;
                 state.weather = action.payload.weather;
                 state.wind = action.payload.wind;
+                state.isLoaded = true
+            },
+            resetData: (state) => {
+               
+                state.isLoaded = false
             }
         }
     }
 )
-export const { setData } = WeatherSlise.actions
+export const { setData ,resetData} = WeatherSlise.actions
 export default WeatherSlise.reducer
