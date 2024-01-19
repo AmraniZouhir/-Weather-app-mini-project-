@@ -11,7 +11,9 @@ const initialState = {
         country: undefined,
         sunrise: undefined
     },
-    weather: undefined,
+    weather: {
+        icon:undefined
+    },
     wind: {
         speed: undefined
     },
@@ -30,7 +32,7 @@ export const WeatherSlise = createSlice(
                 state.main = action.payload.main;
                 state.name = action.payload.name;
                 state.sys = action.payload.sys;
-                state.weather = action.payload.weather;
+                state.weather = action.payload.weather[0];
                 state.wind = action.payload.wind;
                 state.isLoaded = true
             },

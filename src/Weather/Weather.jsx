@@ -5,12 +5,17 @@ import PositionSvg from '../assets/img/weather/svgs/PositionSvg'
 import DefaultWeather from '../assets/img/weather/svgs/DefaultWeather'
 import Thermometer from '../assets/img/weather/svgs/Thermometer'
 import Time from '../assets/img/weather/svgs/Time'
-import Wind from '../assets/img/weather/svgs/Wind'
 import { useSelector } from 'react-redux'
 import Humidity from '../assets/img/weather/svgs/Humidity'
 import SpeedoMeter from '../assets/img/weather/svgs/SpeedoMeter'
 import moment from 'moment'; // Import moment
 import Moment from "react-moment";
+import Cloudy from '../assets/img/weather/svgs/Cloudy'
+import Rainy from '../assets/img/weather/svgs/Rainy'
+import Sunny from '../assets/img/weather/svgs/Sunny'
+import Thunder from '../assets/img/weather/svgs/Thunder'
+import Windy from '../assets/img/weather/svgs/Windy'
+import Wind from '../assets/img/weather/svgs/Wind'
 
 export default function Weather() {
     const weather = useSelector(({ weather }) => weather)
@@ -46,6 +51,28 @@ export default function Weather() {
             setGreeting('Good Evening');
         }
     }, []); // Run this effect only once when the component mounts
+
+
+    const displayIcon = () => {
+        const defaultWidth = '200px';
+        const defaultHeight = '200px';
+        const number = weather.weather.icon.substring(0, 2)
+        switch (number) {
+            case '01':
+                return <Sunny width={defaultWidth} height={defaultHeight}/>
+            case '03':
+            case '04':
+                return <Cloudy width={defaultWidth} height={defaultHeight}/>
+            case '10':
+                return <Rainy width={defaultWidth} height={defaultHeight}/>
+            case '11':
+                return <Thunder width={defaultWidth} height={defaultHeight}/>
+            default:
+                return <img src={`https://openweathermap.org/img/wn/${weather.weather.icon}@2x.png`} alt=""/>
+        }
+    }
+
+
     return (
         <>
             <Card className={style.container}>
@@ -62,7 +89,7 @@ export default function Weather() {
 
                         </Card.Title>
                         <Card.Text as={'div'} className={style.text}>
-                            <div><DefaultWeather width={'250px'} height={'250px'} /></div>
+                        {displayIcon()}
                             <div className={style.tempirater}>
 
                                 <div>  {weather.main.feels_like} ° C</div>
@@ -80,7 +107,7 @@ export default function Weather() {
                                 </div>
 
                                 <div className={style.border_right}>
-                                    <div><Wind /></div>
+                                    <div>  <Wind/></div>
                                     <div>Wind</div>
                                     <div>{weather.wind.speed} m/s</div>
                                 </div>
