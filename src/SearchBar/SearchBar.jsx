@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
 import Style from '../SearchBar/styleSearchBar.module.scss'
 import { Autocomplete, TextField } from '@mui/material'
@@ -11,6 +11,7 @@ export default function SearchBar() {
 
     const [cites, setCites] = useState([])
     const [unity, setUnity] = useState('metric')
+    const [geoLocation, setgeoLocation] = useState()
     const dispatche = useDispatch()
 
     const handeleInputeChange = (e) => {
@@ -37,7 +38,18 @@ export default function SearchBar() {
                 console.error('Error fetching data:', error);
             });
     }
-
+    const getData =()=>{
+        if(geoLocation){
+            const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${geoLocation.lat}&units=${unity}&lon=${geoLocation.lon}&appid=${WEWTHAPIKEY}`;
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(json => {
+                    const { clouds, main, name, sys, weather, wind } = json
+                    dispatche(setData({ clouds, main, name, sys, weather, wind }))
+                })
+        }
+      
+    }
 
     const handelChangeSelect = (event, value) => {
         console.log(WEWTHAPIKEY);
@@ -45,15 +57,11 @@ export default function SearchBar() {
 
         if (value && value.lat && value.lon) {
             const { lon, lat } = value;
-            const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&units=${unity}&lon=${lon}&appid=${WEWTHAPIKEY}`;
-            fetch(apiUrl)
-                .then(response => response.json())
-                .then(json => {
-                    const { clouds, main, name, sys, weather, wind } = json
-                    dispatche(setData({ clouds, main, name, sys, weather, wind }))
-                })
-                .catch(error => console.error('Error:', error)
-                );
+            setgeoLocation({
+                lon,
+                lat
+            })
+                
         }
          else   {
             dispatche(resetData());
@@ -63,8 +71,23 @@ export default function SearchBar() {
 
 
     const getGeipoLocation =()=>{
-
+        navigator.geolocation.getCurrentPosition((position)=>{
+            setgeoLocation({
+                lon:position.coords.longitude,
+                lat:position.coords.latitude
+            })
+        })
     }
+    useEffect(()=>{
+        if(hasGeipoLocation()){
+            getGeipoLocation()
+
+        }
+    },[]);
+    useEffect(()=>{
+       getData()
+    },[geoLocation]);
+
     const hasGeipoLocation =()=>{
         return navigator.geolocation
     }
@@ -84,7 +107,7 @@ export default function SearchBar() {
                         options={cites}>
 
                     </Autocomplete>
-                    <Button size={'sm'} variant='primary'>Serch</Button>
+                    <Button onClick={()=>{getGeipoLocation()}} size={'sm'} variant='primary'>Serch</Button>
                 </Form.Group>
             </Form>
         </>
