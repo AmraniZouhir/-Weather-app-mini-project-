@@ -2,13 +2,14 @@
 
 .serchContent{
     display: flex;
-    gap: $weather-info-gap ;
-    margin: 5rem auto 0;
+    gap: 1rem;
+    margin: 2rem auto 0;
 }
 .serchinput{
     width: 100%;
-    background-color: rgba(255, 255, 255 ,0.3 );
+    background-color: rgba(255,255,255,0.3);
     border: none;
-    border-bottom: wheat 3px solid;
+    border-bottom: white 3px solid;
+    border-radius: 0;
 
 }
